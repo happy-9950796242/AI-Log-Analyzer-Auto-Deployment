@@ -1,0 +1,5 @@
+INFO: Application Started Successfully
+INFO: User Login Successful
+WARNING: Low Memory Detected
+ERROR: Database Connection Failed
+INFO: Application Closed
