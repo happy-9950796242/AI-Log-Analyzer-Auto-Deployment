@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/happy-9950796242/AI-Log-Analyzer-Auto-Deployment.git'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                bat 'docker build -t ai-log-analyzer .'
+            }
+        }
+
+        stage('Stop Old Container') {
+            steps {
+                bat 'docker stop ai-log-analyzer || exit 0'
+                bat 'docker rm ai-log-analyzer || exit 0'
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                bat 'docker run -d -p 8000:8000 --name ai-log-analyzer ai-log-analyzer'
+            }
+        }
+    }
+}
